@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>VueJS  Template</title>
+        <script src="vue.js"></script>
+    </head>
+    <body>
+        <div id="blog-posts-events-demo">
+          <div :style="{ fontSize: postFontSize + 'em' }">
+            <blog-post
+              v-for="post in posts"
+              v-bind:key="post.id"
+              v-bind:post="post"
+              v-on:enlarge-text="postFontSize += 0.1"
+            ></blog-post>
+          </div>
+          <alert-box>
+            Đã xảy ra cái gì gì đó.
+          </alert-box>
+        </div>
+        
+        <script>
+          Vue.component('alert-box', {
+            template: `
+              <div class="demo-alert-box">
+                <strong>Lỗi!</strong>
+                <slot></slot>
+              </div>
+            `
+          })
+
+          Vue.component('blog-post', {
+            props: ['post'],
+            template: `
+              <div class="blog-post-ikk">
+                <h3>{{ post.title }}</h3>
+                <button v-on:click="$emit('enlarge-text')">
+                  Phóng to
+                </button>
+              </div>
+            `
+          })
+
+          var vm = new Vue({
+            el: '#blog-posts-events-demo',
+            data: {
+              posts: [ { id: 0, title: 'Cà pháo' },
+                { id: 1, title: 'Mắm tôm' },
+                { id: 2, title: 'Miễn ăn được là được' }],
+              postFontSize: 1
+            }
+          })
+          
+          console.log(vm.$data);
+        </script>
+    </body>
+</html>
