@@ -3,16 +3,14 @@
     <!-- <h2>Counter components</h2> -->
     <button 
       class="btn btn-outline-success"
-      @click="increment">Increment</button>
+      @click="increment">Increment * 10</button>
     <button 
       class="btn btn-outline-danger"
-      @click="decrement">Decrement</button>
+      @click="decrement">Decrement / 10</button>
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-
 export default {
   data() {
     return {
@@ -22,15 +20,12 @@ export default {
   methods: {
     increment() {
       // this.$emit('update', 1)
-      // this.$store.state.result++
-      this.$store.dispatch('increment', 25)
+      this.$store.state.result *= 10 
     },
     decrement() {
       // this.$emit('update', -1)
-      // this.$store.state.result--
-      this.$store.dispatch('asyncDecrement')
+      this.$store.state.result /= 10
     }
-    // ...mapMutations(['decrement'])
   },
 };
 </script>
