@@ -1,36 +1,30 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import result from './modules/result.js'
+
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    result: 0
+    value: ''
   },
   getters: {
-    tenCount: state => {
-      return state.result * 10;
-    },
-    nameResult: state => {
-      return state.result + ' name product'
+    value: state => {
+      return state.value;
     }
   },
   mutations: {
-    increment(state, n) {
-      state.result += n;
-    },
-    decrement(state) {
-      state.result--;
+    updateValue: (state, payload) => {
+      state.value = payload
     }
   },
   actions: {
-    increment: ({ commit }, n) => {
-      commit('increment', n)
-    },
-    asyncDecrement: ({ commit }) => {
-      setTimeout(() => {
-        commit('decrement')
-      }, 3000)
+    updateValue: ({ commit }, payload) => {
+      commit('updateValue', payload)
     }
+  },
+  modules: {
+    result
   }
 })
